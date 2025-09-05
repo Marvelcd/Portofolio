@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variabel CSS */
+        :root {
+            --primary-color: #c325eb;
+            --secondary-color: #f63bce;
+            --accent-color: #fa60de;
+            --text-color: #371f2f;
+            --light-text: #f8fafc;
+            --background: #f1f5f9;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset dan gaya dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Header & Navigasi */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+        }
+
+        .language-toggle {
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .language-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .language-toggle i {
+            margin-right: 5px;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,138.7C672,139,768,181,864,192C960,203,1056,181,1152,165.3C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--light-text);
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--card-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-category h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .skill-category h3 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 5px;
+            position: relative;
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        /* Experience Section */
+        .experience {
+            background-color: var(--background);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--card-bg);
+            position: relative;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            margin-bottom: 10px;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: var(--card-bg);
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            top: 20px;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -13px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -13px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--card-bg);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-right: 15px;
+            width: 30px;
+        }
+
+        .cv-download {
+            background: var(--background);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .cv-download h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .cv-download p {
+            margin-bottom: 25px;
+        }
+
+        .cv-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: var(--light-text);
+            border-radius: 5px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .cv-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-color);
+            color: var(--light-text);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 70%;
+                height: calc(100vh - 70px);
+                background: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+                box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 18px;
+            }
+
+            .timeline-item:nth-child(odd)::after {
+                right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Portfolio</div>
+                <ul class="nav-links">
+                    <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+                    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <button class="language-toggle" id="languageToggle">
+                            <i class="fas fa-globe"></i>
+                            <span>EN</span>
+                        </button>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <img src="https://placehold.co/400x400?text=Profile+Photo" alt="Profile Photo" class="profile-img">
+                <h1 data-i18n="hero.greeting">Hello, I'm Marvel Cristo Damanik</h1>
+                <p data-i18n="hero.description">Welcome to my portfolio! I'm a telecommunications technician with expertise in programming, networking, and IoT.</p>
+                <a href="#about" class="btn" data-i18n="hero.button">Explore More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title" data-i18n="about.title">About Me</h2>
+            <p data-i18n="about.description1">I have a strong understanding of Python and C++ programming, as well as experience using CSS, PHP, HTML, and JavaScript. I've worked with Linux operating systems, conducted cybersecurity experiments (ethical hacking), and configured networks including routers, switches, and access points using Cisco software. Additionally, I have experience in creating and preparing fiber optics for deployment. I can design and print PCBs, perform 3D printing, have created games using Python programming, developed web applications connected to Huawei Cloud, and designed antennas and filters using CST Studio Suite.</p>
+            
+            <p data-i18n="about.description2">I'm proficient in Microsoft Excel and Microsoft Word, and skilled in technical design tools like AutoCAD and EagleCAD. I'm good at calculations and have experience in campus sales with 70% profit margins. I'm adaptable, quick to learn new things, and capable of providing effective solutions to various problems.</p>
+            
+            <h3 data-i18n="about.interests">Interests / Work Preferences</h3>
+            <p data-i18n="about.interestsList">Programming, IoT, Microcontrollers</p>
+            
+            <h3 data-i18n="about.address">Address</h3>
+            <p data-i18n="about.addressDetail">Indonesia, West Java, Bandung</p>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> <span data-i18n="skills.programming">Programming</span></h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Python</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>C++</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>HTML/CSS/JS</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-network-wired"></i> <span data-i18n="skills.networking">Networking</span></h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Cisco Networking</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Fiber Optic</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Ethical Hacking</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="70%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-microchip"></i> <span data-i18n="skills.hardware">Hardware</span></h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>PCB Design</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>3D Printing</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Microcontrollers</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title" data-i18n="experience.title">Education & Experience</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 data-i18n="experience.item1.title">Telkom University - Bandung City</h3>
+                        <p class="timeline-date">2022 - 2025</p>
+                        <p data-i18n="experience.item1.description">A.Md.T D3 Telecommunications Engineering</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 data-i18n="experience.item2.title">KKAITM - Bandung City</h3>
+                        <p class="timeline-date">2025 - 2025</p>
+                        <p data-i18n="experience.item2.description">HW Engineer - designing microcontroller systems, designing casings, designing PCB layouts</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 data-i18n="experience.item4.title">IoT Lab Assistant</h3>
+                        <p class="timeline-date">2025 - 2025</p>
+                        <p data-i18n="experience.item4.description">Teaching Internet of Things (IoT) practicum with a focus on IoT system development and integration with various cloud platforms.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 data-i18n="experience.item5.title">Microcontroller Lab Assistant</h3>
+                        <p class="timeline-date">2024 - 2024</p>
+                        <p data-i18n="experience.item5.description">Teaching about microcontrollers and designing web-connected microcontroller systems. Providing practical training on microcontroller programming, sensors, and web interfaces.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 data-i18n="experience.item3.title">Student Council - Bandung, Indonesia</h3>
+                        <p class="timeline-date">2019 - 2022</p>
+                        <p data-i18n="experience.item3.description">Served as Vice Secretary, Creative Chairperson, and in Security and Consumption divisions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" data-i18n="contact.title">Contact Me</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-i18n="contact.address">Bandung, West Java, Indonesia</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>marveldmk03@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+62 8999457440</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>linkedin.com/in/marvel-damanik-57431b342</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>https://github.com/Marvelcd</span>
+                    </div>
+                </div>
+                
+                <div class="cv-download">
+                    <h3 data-i18n="cv.title">Download My CV</h3>
+                    <p data-i18n="cv.description">Please download my curriculum vitae for more information about my qualifications and work experience.</p>
+                    <a href="#" class="cv-btn" data-i18n="cv.button">Download CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://wa.me/628999457440" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:marveldmk03@gmail.com"><i class="fab fa-google"></i></a>
+                <a href="https://www.instagram.com/marvel_c.d?igsh=MWNnaTQ1b3I0cXJqOA=="><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/in/marvel-damanik-57431b342"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Marvelcd"><i class="fab fa-github"></i></a>
+            </div>
+            <p>&copy; 2024 My Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data untuk multi-bahasa
+        const translations = {
+            en: {
+                // Navigasi
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.experience": "Experience",
+                "nav.contact": "Contact",
+                
+                // Hero section
+                "hero.greeting": "Hello, I'm Marvel Cristo Damanik",
+                "hero.description": "Welcome to my portfolio! I'm a telecommunications technician with expertise in programming, networking, and IoT.",
+                "hero.button": "Explore More",
+                
+                // About section
+                "about.title": "About Me",
+                "about.description1": "I have a strong understanding of Python and C++ programming, as well as experience using CSS, PHP, HTML, and JavaScript. I've worked with Linux operating systems, conducted cybersecurity experiments (ethical hacking), and configured networks including routers, switches, and access points using Cisco software. Additionally, I have experience in creating and preparing fiber optics for deployment. I can design and print PCBs, perform 3D printing, have created games using Python programming, developed web applications connected to Huawei Cloud, and designed antennas and filters using CST Studio Suite.",
+                "about.description2": "I'm proficient in Microsoft Excel and Microsoft Word, and skilled in technical design tools like AutoCAD and EagleCAD. I'm good at calculations and have experience in campus sales with 70% profit margins. I'm adaptable, quick to learn new things, and capable of providing effective solutions to various problems.",
+                "about.interests": "Interests / Work Preferences",
+                "about.interestsList": "Programming, IoT, Microcontrollers",
+                "about.address": "Address",
+                "about.addressDetail": "Indonesia, West Java, Bandung",
+                
+                // Skills
+                "skills.programming": "Programming",
+                "skills.networking": "Networking",
+                "skills.hardware": "Hardware",
+                
+                // Experience
+                "experience.title": "Education & Experience",
+                "experience.item1.title": "Telkom University - Bandung City",
+                "experience.item1.description": "A.Md.T D3 Telecommunications Engineering",
+                "experience.item2.title": "KKAITM - Bandung City",
+                "experience.item2.description": "HW Engineer - designing microcontroller systems, designing casings, designing PCB layouts",
+                "experience.item3.title": "Student Council - Bandung, Indonesia",
+                "experience.item3.description": "Served as Vice Secretary, Creative Chairperson, and in Security and Consumption divisions",
+                "experience.item4.title": "IoT Lab Assistant",
+                "experience.item4.description": "Teaching Internet of Things (IoT) practicum with a focus on IoT system development and integration with various cloud platforms.",
+                "experience.item5.title": "Microcontroller Lab Assistant",
+                "experience.item5.description": "Teaching about microcontrollers and designing web-connected microcontroller systems. Providing practical training on microcontroller programming, sensors, and web interfaces.",
+                
+                // Contact
+                "contact.title": "Contact Me",
+                "contact.address": "Bandung, West Java, Indonesia",
+                
+                // CV
+                "cv.title": "Download My CV",
+                "cv.description": "Please download my curriculum vitae for more information about my qualifications and work experience.",
+                "cv.button": "Download CV"
+            },
+            id: {
+                // Navigasi
+                "nav.home": "Home",
+                "nav.about": "Tentang",
+                "nav.experience": "Pengalaman",
+                "nav.contact": "Kontak",
+                
+                // Hero section
+                "hero.greeting": "Halo, Saya Marvel Cristo Damanik",
+                "hero.description": "Selamat datang di portofolio saya! Saya seorang teknisi telekomunikasi dengan keahlian dalam pemrograman, jaringan, dan IoT.",
+                "hero.button": "Jelajahi Lebih Lanjut",
+                
+                // About section
+                "about.title": "Tentang Saya",
+                "about.description1": "Saya memiliki pemahaman dalam pemrograman Python dan C++, serta pengalaman menggunakan CSS, PHP, HTML, dan JavaScript. Pernah bekerja dengan sistem operasi Linux, melakukan percobaan keamanan siber (ethical hacking), dan mengonfigurasi jaringan seperti router, switch, dan access point menggunakan software Cisco. Selain itu, saya juga memiliki pengalaman dalam membuat dan menyiapkan fiber optik agar siap digunakan. Dapat mendesain dan mencetak PCB. Dapat melakukan printing 3D. Pernah membuat Game menggunakan pemograman Python. Pernah membuat Web yang terhubung dengan Huawei Cloud. Pernah membuat Antena dan filter menggunakan CST Studio Suite.",
+                "about.description2": "Saya mahir menggunakan Microsoft Excel dan Microsoft Word, serta menguasai perangkat desain teknis seperti AutoCAD dan EagleCAD. Jago berhitung. Pernah Berjualan di acara kampus dengan keutungan 70% dari penegeluaran. Saya mudah beradaptasi, cepat mempelajari hal-hal baru, dan memiliki kemampuan dalam memberikan solusi yang efektif untuk berbagai permasalahan.",
+                "about.interests": "Ketertarikan / Minat Kerja",
+                "about.interestsList": "Programming, IoT, Mikrokontroler",
+                "about.address": "Alamat",
+                "about.addressDetail": "Indonesia, Jawa Barat, Bandung",
+                
+                // Skills
+                "skills.programming": "Pemrograman",
+                "skills.networking": "Jaringan",
+                "skills.hardware": "Hardware",
+                
+                // Experience
+                "experience.title": "Pendidikan & Pengalaman",
+                "experience.item1.title": "Universitas Telkom - Kota Bandung",
+                "experience.item1.description": "A.Md.T D3 Teknik Telekomunikasi",
+                "experience.item2.title": "KKAITM - Kota Bandung",
+                "experience.item2.description": "HW Engineer - merancang sistem mikrokontroler, merancang casing, merancang desain PCB",
+                "experience.item3.title": "OSIS - Bandung, Indonesia",
+                "experience.item3.description": "Pernah menjadi Wakil Sekertaris, Pernah menjadi Ketua Creatif, Pernah dibagian Keamanan dan konsumsi",
+                "experience.item4.title": "Asisten Lab Praktikum IoT",
+                "experience.item4.description": "Mengajar praktikum Internet of Things (IoT) dengan fokus pada pengembangan sistem IoT dan integrasi dengan berbagai platform cloud.",
+                "experience.item5.title": "Asisten Lab Praktikum Mikrokontroler",
+                "experience.item5.description": "Mengajar mengenai mikrokontroler dan membuat perancangan mikrokontroler yang terhubung dengan web. Memberikan pelatihan praktikum tentang pemrograman mikrokontroler, sensor, dan antarmuka web.",
+                
+                // Contact
+                "contact.title": "Hubungi Saya",
+                "contact.address": "Bandung, Jawa Barat, Indonesia",
+                
+                // CV
+                "cv.title": "Unduh CV Saya",
+                "cv.description": "Silakan unduh curriculum vitae saya untuk informasi lebih lanjut tentang kualifikasi dan pengalaman kerja.",
+                "cv.button": "Unduh CV"
+            }
+        };
+
+        // Fungsi untuk mengganti bahasa
+        function setLanguage(lang) {
+            // Update semua elemen dengan atribut data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update tombol bahasa
+            const toggleButton = document.getElementById('languageToggle');
+            if (lang === 'id') {
+                toggleButton.querySelector('span').textContent = 'ID';
+            } else {
+                toggleButton.querySelector('span').textContent = 'EN';
+            }
+            
+            // Simpan preferensi bahasa
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Animate skill bars on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate skill bars on scroll
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            function animateSkills() {
+                skillBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width;
+                });
+            }
+            
+            // Intersection Observer for skill animation
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateSkills();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const skillsSection = document.querySelector('.skills-grid');
+            if (skillsSection) {
+                observer.observe(skillsSection);
+            }
+            
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+            
+            // Toggle bahasa
+            const languageToggle = document.getElementById('languageToggle');
+            let currentLanguage = localStorage.getItem('preferredLanguage') || 'en';
+            
+            // Set bahasa awal
+            setLanguage(currentLanguage);
+            
+            languageToggle.addEventListener('click', () => {
+                if (currentLanguage === 'en') {
+                    currentLanguage = 'id';
+                } else {
+                    currentLanguage = 'en';
+                }
+                setLanguage(currentLanguage);
+            });
+        });
+    </script>
+</body>
+</html>
